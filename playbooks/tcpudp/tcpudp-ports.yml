@@ -1,0 +1,24 @@
+# Print all listening ports(tcp/udp) on web host
+
+- gather_facts: true
+  hosts: myhost
+  become: false
+  become_method: sudo
+
+  tasks:
+    - name: Collect Facts
+      ansible.builtin.command: ss -lnt
+      register: tcp_listen
+
+    - name: List TCP Ports
+      ansible.builtin.debug:
+        var: tcp_listen.stdout_lines
+
+    - name: Collect UDP listening ports
+      ansible.builtin.command: ss -lnu
+      register: udp_listen
+      changed_when: false
+
+    - name: List UDP ports
+      ansible.builtin.debug:
+        var: udp_listen.stdout_lines
