@@ -22,3 +22,23 @@
     - name: List UDP ports
       ansible.builtin.debug:
         var: udp_listen.stdout_lines
+
+---
+
+
+# base playbook, ubuntu 26 doesnt support this
+- gather_facts: true
+  hosts: web
+
+  tasks:
+    - name: Collect Facts
+      listen_ports_facts:
+
+    - name: List TCP Ports
+      debug:
+        msg: "{{ tcp_listen }}"
+
+    - name: List  UDP Ports
+      debug:
+        msg: "{{ udp_listen }}"
+
