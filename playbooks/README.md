@@ -9,7 +9,7 @@
 
 - Run the playbook
   ```
-  ansible-playbook -i web-inventory tcpudp-ports.yml --ask-pass -b -K -vv
+  ansible-playbook -i <inventory-file-name> <playbook-file-name> --ask-pass -b -K -vv
   ```
   - `-i <inv-file-name>` target inventory file
   - `--ask-pass` Prompts you for the SSH password of the target machine
