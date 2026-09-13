@@ -1,0 +1,13 @@
+# example for simple variables defined inside the playbook
+
+- name: Example Simple Variable
+  hosts: all
+  become: yes
+  vars:
+    username: aaron
+
+  tasks:
+  - name: Add the user {{ username }}
+    ansible.builtin.user:
+      name: "{{ username }}"
+      state: present
