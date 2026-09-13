@@ -1,13 +1,15 @@
 # example for simple variables defined inside the playbook
 
-- name: Example Simple Variable
-  hosts: all
-  become: yes
-  vars:
-    username: aaron
-
+- name: Add Users
+  hosts: myhost
+  become: true
+  vars_files:
+      - /home/user/ansible/separate_var/user_vars.yml
   tasks:
-  - name: Add the user {{ username }}
-    ansible.builtin.user:
-      name: "{{ username }}"
-      state: present
+      - name: Add several users
+        user:
+         name: "{{ item.name }}"
+         uid: "{{ item.uid }}"
+         groups: "{{ item.groups }}"
+         state: present
+        with_items: "{{ user_details }}"
