@@ -1,0 +1,2 @@
+[myhost]
+192.168.56.105 ansible_connection=ssh ansible_user=user
